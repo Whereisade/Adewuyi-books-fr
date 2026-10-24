@@ -156,6 +156,8 @@ export async function proxyDjango(request: NextRequest, path: string[]): Promise
     "X-Content-Type-Options": "nosniff",
   });
   if (contentType) headers.set("Content-Type", contentType);
+  const contentDisposition = upstream.headers.get("content-disposition");
+  if (contentDisposition) headers.set("Content-Disposition", contentDisposition);
   const response = responseWithCookies(upstreamBody, upstream.status, updatedAccess, updatedRefresh);
   headers.forEach((value, key) => response.headers.set(key, value));
   return response;

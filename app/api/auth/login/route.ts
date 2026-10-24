@@ -13,14 +13,14 @@ export async function POST(request: NextRequest) {
   if (!base) return NextResponse.json({ detail: "The backend URL is not configured." }, { status: 500 });
   base = base.replace(/\/+$/, "");
 
-  let credentials: { username?: string; password?: string };
+  let credentials: { email?: string; password?: string };
   try {
     credentials = await request.json();
   } catch {
-    return NextResponse.json({ detail: "Provide a username and password." }, { status: 400 });
+    return NextResponse.json({ detail: "Provide an email address and password." }, { status: 400 });
   }
-  if (!credentials.username || !credentials.password) {
-    return NextResponse.json({ detail: "Enter your username and password." }, { status: 400 });
+  if (!credentials.email || !credentials.password) {
+    return NextResponse.json({ detail: "Enter your email address and password." }, { status: 400 });
   }
 
   let upstream: Response;
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     upstream = await fetch(`${base}/auth/token/`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ username: credentials.username, password: credentials.password }),
+      body: JSON.stringify({ email: credentials.email.trim().toLowerCase(), password: credentials.password }),
       cache: "no-store",
     });
   } catch {
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 
   const payload = await upstream.json().catch(() => ({})) as { access?: string; refresh?: string; detail?: string };
   if (!upstream.ok || !payload.access || !payload.refresh) {
-    return NextResponse.json({ detail: payload.detail || "Sign-in failed. Check your username and password." }, { status: upstream.status || 401 });
+    return NextResponse.json({ detail: payload.detail || "Sign-in failed. Check your email address and password." }, { status: upstream.status || 401 });
   }
 
   const response = NextResponse.json({ ok: true });

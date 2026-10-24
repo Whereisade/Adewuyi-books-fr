@@ -492,3 +492,258 @@ button:disabled { opacity: .62; cursor: not-allowed; }
   .service-description { grid-column: 1 / -1; }
   .material-line-editor { grid-template-columns: minmax(0,1fr) 78px 30px; }
 }
+
+
+/* Booking detail and transactional workflow */
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: #0b897a; font-size: 11px; font-weight: 700; margin-bottom: 12px; }
+.booking-number-link { color: #0d8172; text-decoration: none; }
+.booking-number-link:hover { text-decoration: underline; }
+.button-danger { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 38px; padding: 0 13px; border: 1px solid #f0d7d6; border-radius: 8px; background: #fff7f6; color: #b44c4c; font-size: 11px; font-weight: 700; }
+.button-danger:hover { background: #fff0ef; }
+.booking-detail-stats { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 13px; }
+.booking-detail-stats .stat-card { min-width: 0; }
+.detail-overview-panel { overflow: hidden; }
+.booking-overview-grid { padding: 20px 21px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 19px 16px; }
+.booking-overview-grid > div, .deposit-summary-grid > div { display: flex; min-width: 0; flex-direction: column; gap: 6px; }
+.booking-overview-grid span, .deposit-summary-grid span { color: #8996a5; font-size: 10px; }
+.booking-overview-grid strong, .deposit-summary-grid strong { color: #344358; font-size: 12px; font-weight: 750; overflow-wrap: anywhere; }
+.detail-inline-info { display: flex; align-items: flex-start; gap: 10px; margin: 0 21px 18px; padding: 13px 14px; color: #147e75; background: #f0faf7; border: 1px solid #deefe9; border-radius: 10px; }
+.detail-inline-info svg { flex-shrink: 0; margin-top: 2px; }
+.detail-inline-info strong, .detail-inline-info span { display: block; font-size: 10px; line-height: 1.5; }
+.detail-inline-info strong { color: #316b64; }
+.detail-inline-info span { color: #73968f; margin-top: 3px; }
+.detail-notes { border-top: 1px solid #edf0f4; padding: 15px 21px; }
+.detail-notes > span { display: block; color: #8b98a7; font-size: 10px; font-weight: 700; }
+.detail-notes p { margin: 6px 0 0; color: #536174; font-size: 11px; line-height: 1.6; white-space: pre-wrap; }
+.detail-items-table { border-top: 1px solid #edf0f4; }
+.detail-items-table .data-table { min-width: 800px; }
+.detail-panel-actions { display: flex; justify-content: flex-end; padding: 14px 21px; border-top: 1px solid #edf0f4; }
+.booking-workflow-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; align-items: start; }
+.detail-action-panel { min-width: 0; overflow: hidden; }
+.detail-action-panel > .panel-heading > svg { color: #0d8979; flex-shrink: 0; }
+.detail-form { padding: 19px 20px; }
+.detail-form .form-two-col { margin-top: 0; }
+.detail-form > .field-label { margin-top: 14px; }
+.detail-form > .field-label:first-child { margin-top: 0; }
+.detail-form-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; margin-top: 17px; border-top: 1px solid #edf0f4; color: #8794a4; font-size: 10px; line-height: 1.5; }
+.detail-form-footer > span { min-width: 0; }
+.detail-form-footer strong { color: #35455a; }
+.detail-history { border-top: 1px solid #edf0f4; padding: 17px 20px 20px; }
+.detail-history h3 { margin: 0 0 12px; color: #344358; font: 800 12px 'Segoe UI', Arial, sans-serif; }
+.detail-history .data-table { min-width: 410px; }
+.detail-help-text { margin: 0 0 15px; color: #8390a0; font-size: 11px; line-height: 1.6; }
+.quantity-entry-list, .return-quantity-list { display: grid; gap: 9px; margin-bottom: 16px; }
+.quantity-entry-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 12px; border: 1px solid #e8edf2; border-radius: 9px; background: #fcfdfd; }
+.quantity-entry-row > div { min-width: 0; }
+.quantity-entry-row strong, .quantity-entry-row span { display: block; }
+.quantity-entry-row strong { color: #39485d; font-size: 11px; }
+.quantity-entry-row span { color: #8b98a7; font-size: 10px; margin-top: 4px; }
+.quantity-small { width: 83px; flex-shrink: 0; text-align: right; }
+.return-entry { border: 1px solid #e7ecf1; border-radius: 10px; padding: 12px; background: #fcfdfd; }
+.return-entry-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+.return-entry-heading strong { color: #39485d; font-size: 11px; }
+.return-entry-heading span { color: #8794a4; font-size: 10px; white-space: nowrap; }
+.return-entry-quantities { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; }
+.deposit-summary-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; padding: 17px 20px; background: #f7fbfa; border-bottom: 1px solid #e6f0ed; }
+.deposit-summary-grid > div:last-child strong { color: #0a8274; }
+
+@media (max-width: 1100px) {
+  .booking-workflow-grid { grid-template-columns: 1fr; }
+  .booking-overview-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 780px) {
+  .booking-detail-stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .booking-detail-heading .heading-actions { flex-wrap: wrap; }
+  .booking-overview-grid { padding: 17px; }
+  .detail-form { padding: 17px; }
+  .detail-history { padding: 16px 17px; }
+  .detail-panel-actions { padding: 13px 17px; }
+}
+@media (max-width: 540px) {
+  .booking-detail-stats { gap: 9px; }
+  .booking-overview-grid { gap: 15px 11px; }
+  .deposit-summary-grid { grid-template-columns: repeat(2,minmax(0,1fr)); padding: 15px 17px; }
+  .detail-form-footer { align-items: stretch; flex-direction: column; }
+  .detail-form-footer .button { width: 100%; }
+  .return-entry-heading { align-items: flex-start; flex-direction: column; }
+  .return-entry-quantities { gap: 7px; }
+}
+
+/* Downloadable document actions and catering-job detail workflow. */
+.inline-document-link { display: inline-flex; align-items: center; gap: 4px; color: #087f73; font-size: 10px; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; margin-top: 5px; }
+.inline-document-link:hover { color: #075e56; }
+.material-workflow-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
+.material-workflow-row { min-width: 0; }
+.material-return-form { border-top: 1px solid #edf0f4; margin-top: 19px; padding-top: 18px; }
+.material-return-line { border: 1px solid #e6ebf0; border-radius: 10px; padding: 12px; margin: 10px 0; }
+.material-return-line > strong { display: block; color: #334256; font-size: 11px; margin-bottom: 3px; }
+.material-return-line > .muted-inline { display: block; font-size: 10px; margin-bottom: 10px; }
+.material-return-inputs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.material-return-inputs label { display: block; color: #6d7b8c; font-size: 10px; }
+.material-return-inputs input { display: block; margin-top: 6px; }
+.movement-history-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid #edf0f4; }
+.movement-history-row:last-child { border-bottom: 0; }
+.movement-history-row > div { min-width: 0; display: grid; gap: 4px; }
+.movement-history-row strong { color: #334256; font-size: 10px; }
+.movement-history-row span { color: #8a97a7; font-size: 10px; overflow-wrap: anywhere; }
+.movement-history-row > b { color: #087f73; font-size: 13px; }
+@media (max-width: 640px) {
+  .material-workflow-grid { grid-template-columns: 1fr; }
+  .material-return-inputs { gap: 7px; }
+}
+
+
+/* Customer finder and on-form quick customer creation. */
+.customer-picker { min-width: 0; }
+.customer-picker-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 9px; align-items: center; }
+.customer-search-box { position: relative; min-width: 0; }
+.customer-search-box > svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #8996a6; z-index: 1; }
+.customer-search-box .text-input { padding-left: 37px; padding-right: 34px; }
+.customer-search-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: 6px; color: #758195; background: #f2f5f7; }
+.customer-add-button { white-space: nowrap; min-height: 40px; }
+.customer-select { margin-top: 8px; }
+.customer-selected-chip { margin-top: 8px; display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #cde9e2; background: #f2fbf8; border-radius: 9px; color: #0b8a7c; font-size: 11px; }
+.customer-selected-chip > span { color: #536578; min-width: 0; flex: 1; }
+.customer-selected-chip strong { color: #26394b; }
+.customer-picker-help { margin: 7px 0 0; color: #8190a0; font-size: 10px; line-height: 1.5; }
+.customer-picker-error { color: #b42318; font-size: 11px; margin: 9px 0 0; }
+.customer-quick-form { border: 1px solid #d9e7e4; background: #f9fcfb; border-radius: 11px; padding: 13px; margin-top: 10px; }
+.customer-quick-heading { display: flex; align-items: center; justify-content: space-between; gap: 9px; color: #087f73; padding-bottom: 11px; border-bottom: 1px solid #e7f0ee; margin-bottom: 12px; }
+.customer-quick-heading strong, .customer-quick-heading span { display: block; }
+.customer-quick-heading strong { color: #2a3b4c; font-size: 12px; }
+.customer-quick-heading span { color: #8794a4; font-size: 10px; margin-top: 3px; }
+.customer-quick-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.customer-quick-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 12px; margin-top: 11px; border-top: 1px solid #e7f0ee; }
+.customer-quick-actions .customer-picker-help { margin: 0; }
+
+/* Party Rentals overview dashboard. */
+.dashboard-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; }
+.dashboard-heading h1 { max-width: 720px; }
+.dashboard-quick-actions, .financial-heading-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.dashboard-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stat-currency { font-size: clamp(18px, 1.9vw, 25px) !important; overflow-wrap: anywhere; }
+.dashboard-quick-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.dashboard-shortcut { min-width: 0; display: flex; align-items: center; gap: 11px; padding: 15px; border: 1px solid #e7edf1; background: #fff; border-radius: 13px; box-shadow: var(--shadow); transition: border-color .15s, transform .15s; }
+.dashboard-shortcut:hover { border-color: #b5dcd5; transform: translateY(-1px); }
+.dashboard-shortcut > span:nth-child(2) { min-width: 0; flex: 1; }
+.dashboard-shortcut strong, .dashboard-shortcut small { display: block; }
+.dashboard-shortcut strong { font-size: 11px; color: #2e4055; }
+.dashboard-shortcut small { margin-top: 4px; font-size: 10px; color: #8694a4; line-height: 1.45; }
+.dashboard-shortcut > svg { color: #9aa7b5; flex-shrink: 0; }
+.shortcut-icon { width: 36px; height: 36px; flex-shrink: 0; display: grid; place-items: center; border-radius: 10px; }
+.shortcut-icon-teal { color: #0b887b; background: #e5f5f1; }
+.shortcut-icon-blue { color: #3a6fbd; background: #eaf1ff; }
+.shortcut-icon-purple { color: #8664bd; background: #f0eafe; }
+.shortcut-icon-amber { color: #aa8136; background: #fff3db; }
+.dashboard-lower-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(280px, .9fr); gap: 16px; align-items: start; }
+.dashboard-orders-panel { min-width: 0; }
+.dashboard-orders-table { min-width: 610px; }
+.panel-action-link, .panel-bottom-link { display: inline-flex; align-items: center; gap: 5px; color: #0b887b; font-size: 10px; font-weight: 700; white-space: nowrap; }
+.panel-bottom-link { justify-content: space-between; width: 100%; padding: 13px 19px; border-top: 1px solid #edf0f4; }
+.dashboard-order-flags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.dashboard-order-flags span { padding: 2px 5px; font-size: 9px; border-radius: 5px; color: #0b8173; background: #e8f7f3; }
+.dashboard-side-column { display: grid; gap: 15px; min-width: 0; }
+.dashboard-health-panel > .panel-heading > svg, .dashboard-alert-panel > .panel-heading > svg { color: #0c8b7e; }
+.inventory-health-list { display: grid; padding: 5px 19px 12px; }
+.inventory-health-list > div, .dashboard-alert-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 0; border-bottom: 1px solid #eff2f5; color: #718094; font-size: 11px; }
+.inventory-health-list > div:last-child, .dashboard-alert-row:last-of-type { border-bottom: 0; }
+.inventory-health-list strong, .dashboard-alert-row strong { color: #2d4055; font-size: 12px; }
+.dashboard-alert-panel { padding-bottom: 0; }
+.dashboard-alert-panel > .dashboard-alert-row { margin: 0 19px; }
+.dashboard-alert-panel .panel-bottom-link { margin-top: 2px; }
+.text-warning { color: #a36e12 !important; }
+
+/* Financial report. */
+.finance-filter-panel { padding: 17px 19px 14px; }
+.finance-filter-title { display: flex; align-items: flex-start; gap: 10px; color: #0b887b; }
+.finance-filter-title > div { display: grid; gap: 3px; }
+.finance-filter-title strong { color: #2f4054; font-size: 12px; }
+.finance-filter-title span { color: #8592a3; font-size: 10px; }
+.finance-filter-controls { display: grid; grid-template-columns: minmax(180px, .8fr) minmax(180px, 1fr) minmax(180px, 1fr); gap: 12px; margin-top: 15px; }
+.finance-range-caption { margin-top: 11px; color: #8794a4; font-size: 10px; line-height: 1.5; }
+.finance-range-caption strong { color: #536174; }
+.finance-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.finance-stats-grid .stat-value { letter-spacing: -.6px; }
+.finance-monthly-panel .panel-heading > svg, .finance-items-panel .panel-heading > svg { color: #0b887b; }
+.finance-trend-list { padding: 7px 20px 13px; }
+.finance-trend-row { display: grid; grid-template-columns: 51px minmax(0, 1fr) 145px; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid #eff2f5; }
+.finance-trend-row:last-child { border-bottom: 0; }
+.finance-trend-month { font-size: 11px; font-weight: 800; color: #35485d; }
+.finance-trend-month small { display: block; color: #94a0ae; font-size: 9px; font-weight: 500; margin-top: 3px; }
+.finance-trend-bars { display: grid; gap: 7px; min-width: 0; }
+.finance-trend-bar-line { display: grid; grid-template-columns: 65px minmax(40px, 1fr) minmax(100px, auto); align-items: center; gap: 9px; min-width: 0; }
+.finance-trend-bar-line > span { color: #8794a4; font-size: 10px; }
+.finance-trend-bar-line > strong { color: #46576b; font-size: 10px; font-weight: 700; text-align: right; white-space: nowrap; }
+.finance-trend-track { height: 7px; overflow: hidden; border-radius: 99px; background: #f0f3f6; }
+.trend-bar { display: block; height: 100%; min-width: 0; border-radius: 99px; }
+.trend-bar-billed { background: #0e9384; }
+.trend-bar-collected { background: #5686da; }
+.trend-bar-expense { background: #c99b49; }
+.finance-trend-delivery { align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding-left: 12px; border-left: 1px solid #eff2f5; }
+.finance-trend-delivery span { color: #8794a4; font-size: 10px; }
+.finance-trend-delivery strong { color: #35465b; font-size: 11px; }
+.finance-items-table { min-width: 800px; }
+.finance-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.finance-detail-grid > .panel { min-width: 0; }
+.finance-detail-grid .panel-heading > svg { color: #0b887b; flex-shrink: 0; }
+.finance-breakdown-list { padding: 0 19px 17px; }
+.finance-breakdown-group { padding: 14px 0; border-bottom: 1px solid #eff2f5; }
+.finance-breakdown-group:last-child { border-bottom: 0; }
+.finance-breakdown-group > strong { display: block; margin-bottom: 9px; font-size: 11px; color: #35465b; }
+.finance-breakdown-group > div { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 7px 0; color: #788697; font-size: 10px; }
+.finance-breakdown-group > div > span { min-width: 0; }
+.finance-breakdown-group > div > span small { display: block; font-size: 9px; color: #9aa5b2; margin-top: 3px; }
+.finance-breakdown-group b { color: #34465a; font-size: 11px; text-align: right; white-space: nowrap; }
+.finance-breakdown-group .finance-breakdown-total { border-top: 1px dashed #e1e7ed; margin-top: 5px; padding-top: 11px; }
+.finance-breakdown-total span, .finance-breakdown-total b { color: #087f73 !important; font-weight: 800; }
+.finance-explanation, .finance-empty-note { color: #8491a1; font-size: 10px; line-height: 1.55; margin: 8px 0 0; }
+.finance-footnotes { display: flex; align-items: flex-start; gap: 11px; padding: 15px 17px; border: 1px solid #e2e9ed; border-radius: 12px; background: #fbfcfd; color: #7c8a99; }
+.finance-footnotes > svg { color: #0b887b; flex-shrink: 0; margin-top: 1px; }
+.finance-footnotes strong { color: #34465b; font-size: 11px; }
+.finance-footnotes p { margin: 6px 0 0; font-size: 10px; line-height: 1.65; }
+.finance-footnotes p strong { font-size: 10px; }
+
+@media (max-width: 1160px) {
+  .dashboard-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dashboard-quick-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dashboard-lower-grid { grid-template-columns: minmax(0, 1.3fr) minmax(260px, .8fr); }
+  .finance-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .finance-trend-row { grid-template-columns: 45px minmax(0, 1fr); }
+  .finance-trend-delivery { grid-column: 2; border-left: 0; padding-left: 0; flex-direction: row; align-items: center; justify-content: space-between; }
+}
+@media (max-width: 780px) {
+  .dashboard-heading { align-items: flex-start; flex-direction: column; }
+  .dashboard-quick-actions { width: 100%; }
+  .dashboard-lower-grid, .finance-detail-grid { grid-template-columns: 1fr; }
+  .financial-heading-actions { width: 100%; }
+  .finance-filter-controls { grid-template-columns: 1fr; }
+  .finance-trend-list { padding: 4px 15px 10px; }
+  .finance-trend-row { gap: 10px; }
+  .finance-trend-bar-line { grid-template-columns: 58px minmax(35px, 1fr) minmax(84px, auto); gap: 6px; }
+  .customer-picker-toolbar { grid-template-columns: 1fr; }
+  .customer-add-button { justify-content: center; }
+}
+@media (max-width: 540px) {
+  .dashboard-stats, .dashboard-quick-grid, .finance-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .dashboard-shortcut { align-items: flex-start; flex-wrap: wrap; padding: 12px; gap: 8px; }
+  .dashboard-shortcut > svg { margin-left: auto; }
+  .dashboard-shortcut small { font-size: 9px; }
+  .finance-filter-panel { padding: 15px; }
+  .finance-trend-row { grid-template-columns: 1fr; align-items: stretch; }
+  .finance-trend-month small { display: inline; margin-left: 5px; }
+  .finance-trend-delivery { grid-column: 1; }
+  .customer-quick-fields { grid-template-columns: 1fr; }
+  .customer-quick-actions { align-items: flex-start; flex-direction: column; }
+}
+
+
+/* Historical booking editor. */
+.edit-booking-lines { display: grid; gap: 12px; margin-top: 14px; }
+.edit-booking-line { min-width: 0; padding: 15px; border: 1px solid #e4eaf0; border-radius: 12px; background: #fcfdfd; }
+.edit-line-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; color: #35465b; font-size: 12px; }
+.edit-booking-line .form-two-col { margin-top: 0; }
+.edit-line-totals { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; margin-top: 13px; padding-top: 11px; border-top: 1px dashed #e1e7ed; color: #8491a1; font-size: 10px; }
+.edit-line-totals strong { color: #35465b; }
+.danger-icon-button { color: #b04c48; border-color: #f0d8d6; }
+.danger-icon-button:hover { background: #fff4f3; border-color: #e7beba; }
+@media (max-width: 540px) { .edit-booking-line { padding: 12px; } .edit-line-totals { align-items: flex-start; flex-direction: column; } }

@@ -7,7 +7,7 @@ import { ApiError, login } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -18,7 +18,7 @@ export default function LoginPage() {
     setError("");
     setSubmitting(true);
     try {
-      await login(username.trim(), password);
+      await login(email.trim().toLowerCase(), password);
       router.replace("/");
       router.refresh();
     } catch (err) {
@@ -64,8 +64,8 @@ export default function LoginPage() {
             <p>Enter the login details assigned to your business.</p>
           </div>
           <form className="login-form" onSubmit={handleSubmit}>
-            <label className="field-label" htmlFor="username">Username</label>
-            <div className="input-with-icon"><span className="input-leading">@</span><input id="username" autoComplete="username" placeholder="Enter your username" value={username} onChange={(e) => setUsername(e.target.value)} required /></div>
+            <label className="field-label" htmlFor="email">Email address</label>
+            <div className="input-with-icon"><span className="input-leading">@</span><input id="email" type="email" autoComplete="email" placeholder="Enter your email address" value={email} onChange={(e) => setEmail(e.target.value)} required /></div>
             <div className="label-row"><label className="field-label" htmlFor="password">Password</label></div>
             <div className="input-with-icon"><LockKeyhole className="input-leading-icon" size={17} /><input id="password" autoComplete="current-password" type={showPassword ? "text" : "password"} placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} required /><button type="button" className="password-toggle" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? "Hide password" : "Show password"}>{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}</button></div>
             {error && <div className="form-alert" role="alert">{error}</div>}

@@ -48,7 +48,7 @@ A responsive frontend starter for the rental business management app. It is desi
    npm run dev
    ```
 
-5. Open `http://localhost:3000` and sign in using a Django user's username and password.
+5. Open `http://localhost:3000` and sign in using a Django user's email address and password.
 
 ## Authentication and proxy design
 

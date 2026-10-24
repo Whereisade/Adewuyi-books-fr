@@ -7,6 +7,7 @@ export type Division = {
 
 export type UserProfile = {
   id: number;
+  email: string;
   username: string;
   first_name: string;
   last_name: string;
@@ -38,6 +39,7 @@ export type CatalogueItem = {
   name: string;
   description: string;
   price_basis: string;
+  quantity_unit: string;
   default_rental_price: string;
   is_active: boolean;
   notes: string;
@@ -62,11 +64,19 @@ export type BookingItem = {
   item_id: number;
   item_name_snapshot: string;
   sku_snapshot: string;
+  quantity_unit_snapshot: string;
   quantity: number;
   unit_price: string;
   line_subtotal: string;
   discount_amount: string;
   line_total: string;
+  notes?: string;
+  quantity_dispatched?: number;
+  quantity_returned_usable?: number;
+  quantity_returned_damaged?: number;
+  quantity_confirmed_missing?: number;
+  quantity_unresolved?: number;
+  quantity_remaining_to_dispatch?: number;
 };
 
 export type Booking = {
@@ -83,12 +93,19 @@ export type Booking = {
   subtotal: string;
   discount_amount: string;
   additional_charges: string;
+  discount_reason?: string;
   delivery_required: boolean;
   delivery_fee: string;
   delivery_status: string;
   delivery_address: string;
+  delivery_contact_name?: string;
+  delivery_contact_phone?: string;
+  delivery_notes?: string;
   total_amount: string;
   notes: string;
+  is_legacy_import: boolean;
+  paid_confirmed: boolean;
+  supplied_confirmed: boolean;
   items: BookingItem[];
   financials?: Record<string, string>;
 };
@@ -131,4 +148,19 @@ export type DashboardData = {
   delivery_fees_billed_for_rentals_created_today: string;
   delivery_fees_billed_for_catering_jobs_created_today: string;
   delivery_expenses_recorded_today: string;
+};
+
+export type BankAccount = {
+  id: number;
+  label: string;
+  bank_name: string;
+  account_name: string;
+  account_number_masked: string;
+  is_active: boolean;
+  notes?: string;
+};
+
+export type CatalogueAuditEvent = {
+  id: number; action: string; object_type: string; object_id: string; summary: string;
+  before_data: Record<string, unknown>; after_data: Record<string, unknown>; actor: string; created_at: string;
 };

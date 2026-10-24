@@ -10,6 +10,17 @@ export class ApiError extends Error {
   }
 }
 
+type ApiPage<T> = { results: T[]; next: string | null };
+
+function isApiPage<T>(value: unknown): value is ApiPage<T> {
+  return value !== null
+    && typeof value === "object"
+    && "results" in value
+    && Array.isArray(value.results)
+    && "next" in value
+    && (typeof value.next === "string" || value.next === null);
+}
+
 function messageFromPayload(payload: unknown): string {
   if (typeof payload === "string") return payload;
   if (payload && typeof payload === "object") {
@@ -26,7 +37,8 @@ function messageFromPayload(payload: unknown): string {
 export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
   const cleanPath = path.replace(/^\/+/, "");
   const headers = new Headers(options.headers);
-  if (options.body && !headers.has("Content-Type")) headers.set("Content-Type", "application/json");
+  const isFormData = typeof FormData !== "undefined" && options.body instanceof FormData;
+  if (options.body && !isFormData && !headers.has("Content-Type")) headers.set("Content-Type", "application/json");
 
   let response: Response;
   try {
@@ -48,14 +60,29 @@ export async function api<T>(path: string, options: RequestInit = {}): Promise<T
   return payload as T;
 }
 
-export async function login(username: string, password: string): Promise<void> {
+export async function apiList<T>(path: string): Promise<T[]> {
+  let response: unknown = await api<unknown>(path);
+  if (Array.isArray(response)) return response as T[];
+
+  const results: T[] = [];
+  while (isApiPage<T>(response)) {
+    results.push(...response.results);
+    if (!response.next) return results;
+    const query = new URL(response.next, window.location.origin).search;
+    response = await api<unknown>(`${path}${query}`);
+  }
+
+  throw new ApiError("The backend returned an unexpected list response.");
+}
+
+export async function login(email: string, password: string): Promise<void> {
   let response: Response;
   try {
     response = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "same-origin",
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
   } catch {
     throw new ApiError("Unable to reach the login service. Check the backend URL and try again.", 0);

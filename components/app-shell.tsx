@@ -8,11 +8,15 @@ import {
   ChevronDown,
   CircleHelp,
   LayoutDashboard,
+  Landmark,
+  ClipboardList,
+  Upload,
   LogOut,
   Menu,
   Package2,
   UsersRound,
   WalletCards,
+  TrendingUp,
   X,
 } from "lucide-react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
@@ -28,8 +32,11 @@ export function useAuth() {
 const navBase = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
   { href: "/bookings", label: "Bookings & rentals", icon: CalendarDays },
+  { href: "/financials", label: "Financials & reports", icon: TrendingUp },
   { href: "/inventory", label: "Inventory catalogue", icon: Package2 },
   { href: "/customers", label: "Customers", icon: UsersRound },
+  { href: "/bank-accounts", label: "Bank destinations", icon: Landmark },
+  { href: "/audit", label: "Catalogue audit trail", icon: ClipboardList },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -60,6 +67,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   const navItems = useMemo(() => {
     const items = [...navBase];
+    if (user?.division.code === "dad-tables") items.push({ href: "/imports", label: "Import history", icon: Upload });
     if (user?.division.has_catering_services) items.push({ href: "/catering", label: "Catering jobs", icon: ChefHat });
     return items;
   }, [user]);
@@ -124,8 +132,8 @@ export function AppShell({ children }: { children: ReactNode }) {
             <div><strong>Need a hand?</strong><span>Keep records up to date</span></div>
           </div>
           <div className="sidebar-user">
-            <div className="user-avatar">{(user.first_name || user.username || "U").slice(0, 1).toUpperCase()}</div>
-            <div className="sidebar-user-text"><strong>{[user.first_name, user.last_name].filter(Boolean).join(" ") || user.username}</strong><span>{user.role.replaceAll("_", " ")}</span></div>
+            <div className="user-avatar">{(user.first_name || user.email || "U").slice(0, 1).toUpperCase()}</div>
+            <div className="sidebar-user-text"><strong>{[user.first_name, user.last_name].filter(Boolean).join(" ") || user.email}</strong><span>{user.role.replaceAll("_", " ")}</span></div>
             <button className="icon-button logout-button" title="Sign out" onClick={handleLogout}><LogOut size={17} /></button>
           </div>
         </aside>
@@ -136,7 +144,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <div className="breadcrumb"><span>Workspace</span><span className="breadcrumb-sep">/</span><strong>{navItems.find((item) => item.href === "/" ? pathname === "/" : pathname === item.href || pathname.startsWith(`${item.href}/`))?.label || "Details"}</strong></div>
             <div className="topbar-right">
               <span className="secure-pill"><span /> Private workspace</span>
-              <div className="topbar-avatar">{(user.first_name || user.username || "U").slice(0, 1).toUpperCase()}</div>
+              <div className="topbar-avatar">{(user.first_name || user.email || "U").slice(0, 1).toUpperCase()}</div>
             </div>
           </header>
           <main className="page-content">{children}</main>
