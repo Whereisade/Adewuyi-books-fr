@@ -107,6 +107,9 @@ export type Booking = {
   paid_confirmed: boolean;
   supplied_confirmed: boolean;
   items: BookingItem[];
+  payments?: PaymentRecord[];
+  charges?: ChargeAdjustment[];
+  security_deposit?: SecurityDepositRecord | null;
   financials?: Record<string, string>;
 };
 
@@ -163,4 +166,85 @@ export type BankAccount = {
 export type CatalogueAuditEvent = {
   id: number; action: string; object_type: string; object_id: string; summary: string;
   before_data: Record<string, unknown>; after_data: Record<string, unknown>; actor: string; created_at: string;
+};
+
+
+/** A posted or voided customer receipt/refund returned by the finance API. */
+export type PaymentRecord = {
+  id: number;
+  booking?: number | null;
+  catering_job?: number | null;
+  receipt_number?: string | null;
+  kind: "receipt" | "refund" | string;
+  amount: string;
+  method: "cash" | "bank" | string;
+  bank_account?: number | null;
+  bank_account_label?: string;
+  transaction_reference?: string;
+  paid_at: string;
+  notes?: string;
+  status?: string;
+  created_at?: string;
+};
+
+/** Additional, damage, or missing-item charge recorded against a booking. */
+export type ChargeAdjustment = {
+  id: number;
+  kind: string;
+  amount: string;
+  reason: string;
+  status: string;
+  booking_item?: number | null;
+  created_at?: string;
+};
+
+/** Immutable issued invoice or invoice draft returned by the finance API. */
+export type InvoiceRecord = {
+  id: number;
+  invoice_number?: string | null;
+  status?: string;
+  booking?: number | null;
+  catering_job?: number | null;
+  subtotal?: string;
+  discount_amount?: string;
+  additional_charges?: string;
+  delivery_fee?: string;
+  total_amount: string;
+  amount_paid_at_issue?: string;
+  balance_at_issue?: string;
+  snapshot?: Record<string, unknown>;
+  issued_at?: string | null;
+  created_at?: string;
+};
+
+export type DepositTransactionRecord = {
+  id: number;
+  receipt_number?: string | null;
+  kind: string;
+  amount: string;
+  method?: string;
+  bank_account?: number | null;
+  bank_account_label?: string;
+  charge_adjustment?: number | null;
+  transaction_reference?: string;
+  occurred_at: string;
+  notes?: string;
+  status?: string;
+  created_at?: string;
+};
+
+export type SecurityDepositRecord = {
+  required_amount: string;
+  status: string;
+  notes?: string;
+  totals: {
+    received: string;
+    refunded: string;
+    applied: string;
+    held: string;
+    [key: string]: string;
+  };
+  transactions: DepositTransactionRecord[];
+  created_at?: string;
+  updated_at?: string;
 };
