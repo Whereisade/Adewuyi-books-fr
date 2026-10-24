@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Eye, EyeOff, LockKeyhole, Package2, ShieldCheck } from "lucide-react";
 import { ApiError, login } from "@/lib/api";
@@ -12,6 +13,11 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const registeredEmail = new URLSearchParams(window.location.search).get("registered");
+    if (registeredEmail) setEmail(registeredEmail);
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -72,7 +78,7 @@ export default function LoginPage() {
             <button className="button button-primary login-submit" type="submit" disabled={submitting}>{submitting ? "Signing in…" : "Sign in to workspace"}<ArrowRight size={18} /></button>
           </form>
           <div className="login-security-note"><ShieldCheck size={16} /><span>Your session is protected. Use the login assigned to your division.</span></div>
-          <p className="login-footer">Need help accessing your account? Contact your application administrator.</p>
+          <p className="login-footer">Need an account? <Link href="/signup" className="text-link">Create a division manager account</Link><br />Need help accessing your account? Contact your application administrator.</p>
         </div>
       </section>
     </main>

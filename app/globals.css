@@ -747,3 +747,41 @@ button:disabled { opacity: .62; cursor: not-allowed; }
 .danger-icon-button { color: #b04c48; border-color: #f0d8d6; }
 .danger-icon-button:hover { background: #fff4f3; border-color: #e7beba; }
 @media (max-width: 540px) { .edit-booking-line { padding: 12px; } .edit-line-totals { align-items: flex-start; flex-direction: column; } }
+
+
+/* Division-manager signup and year-aware booking register */
+.signup-form-wrap { max-width: 450px; }
+.signup-welcome { margin-bottom: 18px; }
+.signup-form { gap: 4px; }
+.signup-name-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.signup-name-grid > div { min-width: 0; }
+.signup-name-grid .field-label { display: block; }
+.signup-select-wrap select { width: 100%; min-width: 0; border: 0; outline: none; appearance: auto; background: transparent; color: #344359; font-size: 12px; }
+.signup-help { margin: 4px 0; color: #8995a4; font-size: 10px; }
+.signup-success { display: flex; gap: 12px; border: 1px solid #bce6d9; border-radius: 12px; padding: 15px; background: #f0fbf7; color: #147b68; }
+.signup-success > svg { flex-shrink: 0; }
+.signup-success strong, .signup-success span { display: block; }
+.signup-success strong { font-size: 12px; }
+.signup-success span { margin-top: 5px; color: #5a7d75; font-size: 11px; line-height: 1.6; }
+.signup-success .text-link { display: inline-block; margin-top: 8px; }
+.signup-footer { margin-top: 25px; }
+.bookings-toolbar-actions { align-items: flex-end; flex-wrap: wrap; }
+.booking-year-filter { display: grid; gap: 4px; min-width: 150px; }
+.booking-year-filter span { font-size: 10px; font-weight: 700; color: #778599; }
+.booking-year-filter select { height: 38px; max-width: 210px; border: 1px solid #e0e6ec; border-radius: 9px; padding: 0 10px; background: #fff; color: #344359; font-size: 11px; outline: none; }
+.booking-year-filter select:focus { border-color: #99d2c7; box-shadow: 0 0 0 3px rgba(12,139,126,.08); }
+.bookings-pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pagination-controls { display: flex; align-items: center; gap: 10px; }
+.pagination-controls > span { color: #778599; font-size: 10px; min-width: 75px; text-align: center; }
+.bookings-list-note { border-top: 1px solid #eef1f4; padding: 10px 21px 14px; color: #8995a4; font-size: 10px; line-height: 1.6; }
+@media (max-width: 720px) {
+  .signup-layout .login-art-panel { display: none; }
+  .signup-form-panel { padding: 26px 18px; }
+  .signup-form-wrap { max-width: 460px; }
+  .signup-name-grid { gap: 8px; }
+  .bookings-toolbar-actions { align-items: stretch; width: 100%; }
+  .booking-year-filter { flex: 1; min-width: 140px; }
+  .booking-year-filter select { width: 100%; max-width: none; }
+  .bookings-pagination { align-items: flex-start; }
+  .bookings-list-note { padding: 10px 15px 14px; }
+}
