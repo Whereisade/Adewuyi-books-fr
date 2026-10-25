@@ -96,7 +96,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="brand-lockup">
             <div className="brand-mark"><Package2 size={22} strokeWidth={2.3} /></div>
             <div>
-              <div className="brand-name">RentLedger</div>
+              <div className="brand-name">AdeLedger</div>
               <div className="brand-caption">Business workspace</div>
             </div>
             <button className="icon-button sidebar-close" aria-label="Close menu" onClick={() => setMobileNavOpen(false)}><X size={18} /></button>

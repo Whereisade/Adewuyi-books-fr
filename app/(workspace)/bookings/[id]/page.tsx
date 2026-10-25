@@ -115,13 +115,13 @@ export default function BookingDetailPage() {
   const canReturn = !!booking && ["dispatched", "partially_dispatched", "partially_returned"].includes(booking.status) && unresolvedUnits > 0;
   const canCancel = !!booking && ["draft", "confirmed"].includes(booking.status);
 
-  async function doAction(key: string, successMessage: string, action: () => Promise<unknown>, after?: (result: unknown) => void) {
+  async function doAction(key: string, successMessage: string | ((result: unknown) => string), action: () => Promise<unknown>, after?: (result: unknown) => void) {
     setBusy(key); setError(""); setNotice("");
     try {
       const result = await action();
       after?.(result);
       await load(false);
-      setNotice(successMessage);
+      setNotice(typeof successMessage === "function" ? successMessage(result) : successMessage);
     } catch (err) {
       setError(errorMessage(err));
     } finally {
@@ -130,7 +130,13 @@ export default function BookingDetailPage() {
   }
 
   async function confirmBooking() {
-    await doAction("confirm", "Booking confirmed and stock availability checked.", () => api(`bookings/${bookingId}/confirm/`, { method: "POST", body: JSON.stringify({}) }));
+    await doAction(
+      "confirm",
+      (result) => (result as { status?: string })?.status === "historical"
+        ? "Saved as a historical booking. Current inventory was not reserved or changed."
+        : "Booking confirmed and stock availability checked.",
+      () => api(`bookings/${bookingId}/confirm/`, { method: "POST", body: JSON.stringify({}) }),
+    );
   }
 
   async function saveManualOrderStatus() {
